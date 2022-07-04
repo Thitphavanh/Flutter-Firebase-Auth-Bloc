@@ -15,16 +15,20 @@ class SigninState extends Equatable {
     required this.signinStatus,
     required this.error,
   });
-  factory SigninState.initial(){
-    return SigninState(signinStatus: SigninStatus.initial, error: CustomError(),);
-  }
   
+  factory SigninState.initial() {
+    return SigninState(
+      signinStatus: SigninStatus.initial,
+      error: CustomError(),
+    );
+  }
 
   @override
   List<Object> get props => [signinStatus, error];
 
   @override
-  String toString()=> 'SigninState(signinStatus: $signinStatus, error: $error)'; 
+  String toString() =>
+      'SigninState(signinStatus: $signinStatus, error: $error)';
 
   SigninState copyWith({
     SigninStatus? signinStatus,
