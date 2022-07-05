@@ -16,6 +16,18 @@ class User {
     required this.point,
     required this.rank,
   });
+  factory User.fromDoc(DocumentSnapshot userDoc) {
+    final userData = userDoc.data() as Map<String, dynamic>?;
+
+    return User(
+      id: userDoc.id,
+      name: userData!['name'],
+      email: userData['email'],
+      profileImage: userData['profileImage'],
+      point: userData['point'],
+      rank: userData['rank'],
+    );
+  }
 
   factory User.initialUser() {
     return User(
