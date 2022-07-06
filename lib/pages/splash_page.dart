@@ -12,15 +12,21 @@ class SplashPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocConsumer<AuthBloc, AuthState>(
       listener: (context, state) {
-        print('listen: $state');
         if (state.authenStatus == AuthenStatus.unauthenticated) {
-          Navigator.pushNamed(context, SigninPage.routeName);
+          Navigator.pushNamedAndRemoveUntil(context, SigninPage.routeName,
+              (route) {
+            print('rout.settings.name: ${route.settings.name}');
+            print('ModalRoute: ${ModalRoute.of(context)!.settings.name}');
+
+            return route.settings.name == ModalRoute.of(context)!.settings.name
+                ? true
+                : false;
+          });
         } else if (state.authenStatus == AuthenStatus.authenticated) {
           Navigator.pushNamed(context, HomePage.routeName);
         }
       },
       builder: (context, state) {
-        print('builder: $state');
         return Scaffold(
           body: Center(
             child: CircularProgressIndicator(),
